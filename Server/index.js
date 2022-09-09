@@ -4,12 +4,19 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 
 import MONGO_URI from './keys.js';
+import postRoutes from './routes/posts.js';
+
+
 
 
 const app = express();
 
+app.use('/posts', postRoutes); // every route inside the "postRoutes" is gonna start with post -- use routes js code to create a route for a given path -- define that path with express middlewear as shown here 
+
+
 app.use(bodyParser.json({limit: "30mb", extended:true}));
 app.use(bodyParser.urlencoded({"limit": "30mb", extended:true}));
+app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
