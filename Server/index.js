@@ -11,12 +11,14 @@ import postRoutes from './routes/posts.js';
 
 const app = express();
 
-app.use('/posts', postRoutes); // every route inside the "postRoutes" is gonna start with post -- use routes js code to create a route for a given path -- define that path with express middlewear as shown here 
+
 
 
 app.use(bodyParser.json({limit: "30mb", extended:true}));
 app.use(bodyParser.urlencoded({"limit": "30mb", extended:true}));
-app.use(cors());
+app.use(cors()); // this comes before specifying routes
+
+app.use('/posts', postRoutes); // every route inside the "postRoutes" is gonna start with post -- use routes js code to create a route for a given path -- define that path with express middlewear as shown here 
 
 const PORT = process.env.PORT || 5000;
 
