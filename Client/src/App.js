@@ -1,5 +1,6 @@
 import React from 'react';
 import {Container, AppBar, Typography, Grow, Grid} from '@material-ui/core';
+import {useDispatch} from 'react-redux';
 
 
 import Posts from'./components/Posts/Posts';
@@ -10,6 +11,7 @@ import useStyles from './styles';
 const App = () => {
 
     const classes = useStyles();
+    const dispatch = useDispatch(); // this is a hook
     return (
        <Container maxidth="lg">
         <AppBar className={classes.appBar} position="static" color="inherit">
