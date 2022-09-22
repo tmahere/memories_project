@@ -10,9 +10,18 @@ export const getPosts = () => async (dispatch) => {
 
         dispatch({type: 'FETCH_ALL', payload: data});       // successfully using redux to dispatch or pass data from our back end to our front end 
     }
-    catch(error){
-        console.log(error);
+    catch(err){
+        console.log(err.message);
     }
     const action = {type: 'FETCH_ALL', payload: []}
     return action
+}
+
+export const createPost = (post) => async (dispatch) => {
+    try{
+        const {data} = await api.createPost(post);
+        dispatch({type: 'CREATE', paload: data})
+    }catch (err){
+        console.log(err.message)
+    }
 }
