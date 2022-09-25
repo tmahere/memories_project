@@ -6,7 +6,8 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 
 import App from './App';
-import { formatMs } from '@material-ui/core';
+import './index.css';
+
 
 const store = legacy_createStore(reducers, compose(applyMiddleware(thunk)))
 
