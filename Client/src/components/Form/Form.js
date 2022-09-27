@@ -9,7 +9,7 @@ import { createPost, updatePost } from '../../actions/posts';
 //get current Id
 
 const Form = ({ currentId, setCurrentId }) => {
-    const [postData, setPostData] = useState({creator: '', title: '', message: '', tags: '', selectedFile: '', });
+    const [postData, setPostData] = useState({creator: '', title: '', message: '', tags: '', selectedFile: ''});
     const post = useSelector((state) => currentId ? state.posts.find((p) => p._id == currentId) : null);
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -26,15 +26,19 @@ const Form = ({ currentId, setCurrentId }) => {
         }else{
             dispatch(createPost(postData));
         }
+
+        clear();
     }
 // for the FileBase -- when using mongo DB atleast make sure the code on onDONE is perciselsy like that (base 64) -- it helps MongoDB read your picture file as a string
     const clear = () => {
+        setCurrentId(null);
+        setPostData({creator: '', title: '', message: '', tags: '', selectedFile: '' });
 
     }
     return(
         <Paper className={classes.paper}>
             <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-            <Typography variant="h6"> Creating a Memory</Typography>
+            <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} a Memory</Typography>
             <TextField name="creator "variant="outlined" label="Creator" fullWidth value={postData.creator} onChange={(e) => setPostData({...postData, creator: e.target.value})}/>
             <TextField name="title"variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({...postData, title: e.target.value})}/>
             <TextField name="message"variant="outlined" label="Message" fullWidth value={postData.message} onChange={(e) => setPostData({...postData, message: e.target.value})}/>
